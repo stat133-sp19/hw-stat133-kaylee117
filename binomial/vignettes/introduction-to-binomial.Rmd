@@ -1,0 +1,117 @@
+---
+title: "Getting started with binomial package"
+author: "Yingxi Yang"
+date: "2019-04-26"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to binomial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(binomial)
+library(ggplot2)
+```
+The Binomial distribution is perhaps the most famous probability distribution among discrete random variables. This is the theoretical probability model that we use when calculating probabilities about the number of successes in a fixed number of random trials performed under identical conditions(assuming a constant probability of success on each trial).
+
+When working with Binomial distribution, you usually want to calculate:
+
+* Probability of a Binomial random variable
+
+* Probability distribution
+
+* Expected value
+
+* Variance
+
+* Etc.
+
+\n
+
+The binomial package makes things easy and fast:
+
+* By showing you some measures of a Binomial distribution in a more compact and friendly way, it allows you have an overview of the distribution with specific parameters you assigned. 
+
+* It provides robust plot functions for both probability density plot and cumumlative density plot, to help you understand the distribution graphiclly.
+
+* It also provides some basic computation functions to calculate some measures, such as mean, variance, mode, skewness and kurtosis.
+
+This document introduces you to binomial’s basic set of tools, and shows you how to apply them.
+
+## Create a `binvar` object
+
+You can create a `binvar` object with function `bin_variable`. This function takes two arguments: **trials** and **prob**. R will help you check if the parameters you assigned are valid. If they were valid, R will nicely print the content of the object you created. 
+
+```{r}
+bin_variable(trials = 10, prob = 0.3)
+```
+
+If you want know more about your `binvar` object, you can use function `summary` like this:
+
+```{r}
+bin1 <- bin_variable(trials = 10, prob = 0.3)
+summary(bin1)
+```
+
+Or if you only want to get specific summary measures, you can invoke the following functions:
+
+* `bin_mean()`
+
+* `bin_variance()`
+
+* `bin_mode()`
+
+* `bin_skewness()`
+
+* `bin_kurtosis()`
+
+R will show you the measure you interested.
+```{r}
+bin_mean(10, 0.3)
+bin_variance(10, 0.3)
+bin_mode(10, 0.3)
+bin_skewness(10, 0.3)
+bin_kurtosis(10, 0.3)
+```
+
+## Plot your Binomial distribution
+
+The binomial package provides two very user-friendly functions to help you plot the pdf and cdf of the Binomial distribution.
+
+### Plot probability density function
+
+First, you need to use function `bin_distribution` to create a `bindis` object. This function will return a data frame with the probability distribution: *success* in the first column and *probability* in the second column.
+
+```{r}
+bin <- bin_distribution(trials = 5, prob = 0.5)
+bin
+```
+
+Now, you can invoke function `plot()` directly. R will graph a barplot to display the probability histogram of the binomial distribution object `bin` you created just now.
+
+```{r}
+plot(bin)
+```
+
+### Plot cumulative density function
+
+In order to get a cdf plot, firstly you need to invoke function `bin_cumulative()` to create an object `bincum`. This function will return a data frame with both the probability distribution and the cumulative probabilities: *success* in the first column, *probability* in the second column, and *cumulative* in the third column.
+
+```{r}
+dis <- bin_cumulative(trials = 5, prob = 0.5)
+dis
+```
+
+Now, you can invoke the function `plot()` directly to get your cdf plot.
+```{r}
+plot(dis)
+```
+
+\n
+
+Enjoy our binomial package!
