@@ -1,1 +1,1 @@
-This assignment is to create a shiny app to visualize¡ªin an interactive way¡ªsome of the saving scenarios considered in warmup 6. 
+This assignment is to create a shiny app to visualize some of the saving scenarios considered in warmup 6. 
